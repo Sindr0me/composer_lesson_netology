@@ -15,7 +15,8 @@ $api
     ->load();
 
 $response = $api->getResponse();
-
+$response->getFoundCount(); // кол-во найденных адресов
+$response->getQuery(); // исходный запрос
 $response->getLatitude(); // широта для исходного запроса
 $response->getLongitude(); // долгота для исходного запроса
 
