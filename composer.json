@@ -1,0 +1,13 @@
+{
+    "name": "vladimir/netologyhomework1",
+    "description": "it's 1st homework of composer",
+    "authors": [
+        {
+            "name": "Sindr0me",
+            "email": "kupriyanov.vo@gmail.com"
+        }
+    ],
+    "require": {
+        "yandex/geo": "^1.1"
+    }
+}
