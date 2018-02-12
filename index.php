@@ -29,9 +29,74 @@ foreach ($collection as $item) {
     $item->getData(); // необработанные данные
 }
 echo "Долгота: ";
-printf ($dolgota);
-echo "<br>Широта: ";
-printf ($shirota);
+echo $dolgota;
+echo '<script language="javascript">var a = parseFloat('.$dolgota.');</script>';
 
+
+echo "<br>Широта: ";
+echo $shirota;
+echo '<script language="javascript">var b = parseFloat('.$shirota.');</script>';
+// $shir = printf ($shirota);
+// echo "$shir";
+// echo '<script language="javascript">var b = parseFloat('.$shir.');</script>';
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Примеры. Задание собственного изображения для метки</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Если вы используете API локально, то в URL ресурса необходимо указывать протокол в стандартном виде (http://...)-->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <!-- <script src="icon_customImage.js" type="text/javascript"></script> -->
+    <script type="text/javascript">
+
+    ymaps.ready(function () {
+    var myMap = new ymaps.Map('map', {
+            center: [(b), (a)], //1 - широта. 2 - долгота
+            zoom: 9
+        }, {
+            searchControlProvider: 'yandex#search'
+        }),
+
+        // Создаём макет содержимого.
+        MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+            '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+        ),
+
+        myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+            hintContent: 'Собственный значок метки',
+            balloonContent: 'Это красивая метка'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#image',
+            // Своё изображение иконки метки.
+            iconImageHref: 'images/myIcon.gif',
+            // Размеры метки.
+            iconImageSize: [30, 42],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            iconImageOffset: [-5, -38]
+        });
+
+
+
+    myMap.geoObjects
+        .add(myPlacemark)
+        .add(myPlacemarkWithContent);
+});
+	</script>
+	<style>
+        html, body, #map {
+            width: 400px; height: 400px; padding: 0; margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+
+
+</body>
+</html>
